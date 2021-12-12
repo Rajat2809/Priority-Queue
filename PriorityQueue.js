@@ -1,18 +1,18 @@
 class PriorityQueue {
-	// Initialize data and length
+    // Initialize data and length
     constructor() {
         this.data = []
         this.length = 0;
     }
-	// enqueue according to priority
+    // enqueue according to priority
     enqueue(val, priority = 0) {
-		// Error handeling check
+        // Error handeling check
         if (val == undefined || val == null) return;
         let added = false;
-		
+
         for (let i = 0; i < this.length; i++) {
             if (this.data[i].priority > priority) {
-			// add to this.data
+                // add to this.data
                 this.data.splice(i, 0, {
                     val: val,
                     priority: priority
@@ -22,7 +22,7 @@ class PriorityQueue {
                 return;
             }
         }
-		// add to data if this.length=0 or priority is greater then all previous priority
+        // add to data if this.length=0 or priority is greater then all previous priority
         if (!added) {
             this.data.push({
                 val: val,
@@ -32,14 +32,29 @@ class PriorityQueue {
             return;
         }
     }
-	// Remove element from queue return lowest priority one
+    // Remove element from queue return lowest priority one
     dequeue() {
         if (this.length == 0) return;
         this.length -= 1;
         return this.data.splice(0, 1)
     }
 
-    getLength() {
+    size() {
         return this.length;
+    }
+
+    peek() {
+        return this.data[0];
+    }
+
+    getAllVal() {
+        const val = [];
+        this.data.forEach(d => val.push(d.val))
+        return val;
+    }
+    getAllPriority() {
+        const priority = [];
+        this.data.forEach(d => priority.push(d.priority))
+        return priority;
     }
 }
